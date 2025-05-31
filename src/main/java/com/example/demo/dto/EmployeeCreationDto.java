@@ -1,26 +1,14 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Employee {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class EmployeeCreationDto {
 
     @NotBlank(message = "Name is required")
     private String name;
@@ -30,7 +18,6 @@ public class Employee {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "NID is required")
-    @Column(unique = true)
     private String nid;
 
     @NotBlank(message = "Address is required")
@@ -38,7 +25,4 @@ public class Employee {
 
     @NotBlank(message = "Designation is required")
     private String designation;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Project> projects = new ArrayList<>();
 }
