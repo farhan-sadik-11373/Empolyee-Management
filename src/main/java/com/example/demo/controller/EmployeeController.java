@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
