@@ -1,26 +1,16 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Employee {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class EmployeeCreationDto {
 
     @NotBlank(message = "Name is required")
     private String name;
@@ -30,7 +20,6 @@ public class Employee {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "NID is required")
-    @Column(unique = true)
     private String nid;
 
     @NotBlank(message = "Address is required")
@@ -38,17 +27,6 @@ public class Employee {
 
     @NotBlank(message = "Designation is required")
     private String designation;
-
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Project> projects = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -88,13 +66,5 @@ public class Employee {
 
     public void setDesignation(String designation) {
         this.designation = designation;
-    }
-
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
     }
 }
