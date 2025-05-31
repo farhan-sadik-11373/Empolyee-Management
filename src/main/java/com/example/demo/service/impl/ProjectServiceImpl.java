@@ -45,7 +45,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project saveProject(Project project) {
-        logger.info("Saving new project: {}", project.getName());
+        logger.info("Saving new project: {}", project.getProjectName());
         validateProject(project);
         return projectRepository.save(project);
     }
@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
     private void validateProject(Project project) {
         List<String> errors = new ArrayList<>();
         
-        if (project.getName() == null || project.getName().trim().isEmpty()) {
+        if (project.getProjectName() == null || project.getProjectName().trim().isEmpty()) {
             errors.add("Project name cannot be empty");
         }
         
