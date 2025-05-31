@@ -1,8 +1,9 @@
-package com.example.demo.service;
+package com.example.demo.service.impl;
 
 import com.example.demo.model.Attendance;
 import com.example.demo.repository.AttendanceRepository;
 import com.example.demo.exception.AttendanceNotFoundException;
+import com.example.demo.service.AttendanceService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AttendanceServiceImpl implements AttendanceService {
+public class   AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private AttendanceRepository attendanceRepository;
@@ -27,7 +28,15 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<Attendance> getAttendanceRecords(Long employeeId) {
+    public List<Attendance> getAttendanceRecords(Long employeeId, String date) {
+        if (employeeId != null) {
+            return attendanceRepository.findByEmployeeId(employeeId);
+        }
+        return attendanceRepository.findAll();
+    }
+
+    @Override
+    public List<Attendance> getAttendanceHistory(Long employeeId) {
         if (employeeId != null) {
             return attendanceRepository.findByEmployeeId(employeeId);
         }

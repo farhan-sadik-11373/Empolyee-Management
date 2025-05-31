@@ -8,7 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -39,7 +45,7 @@ public class AttendanceController {
 
     @GetMapping("/list")
     public String listAttendances(@RequestParam(required = false) Long employeeId, Model model) {
-        List<Attendance> attendances = attendanceService.getAttendanceRecords(employeeId);
+        List<Attendance> attendances = attendanceService.getAttendanceHistory(employeeId);
         if (attendances.isEmpty()) {
             model.addAttribute("errorMessage", "No attendance records found for the given criteria.");
         }
